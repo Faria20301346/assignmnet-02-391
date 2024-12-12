@@ -1,4 +1,3 @@
-
 const lastModified = document.lastModified;
 document.getElementById("lastmod").innerHTML = lastModified;
 
@@ -100,7 +99,7 @@ function calc() {
     var calcvalue = document.getElementById("calc-value").value;
     calcvalue = calcvalue.replace(/\s+/g, '')
     calculateArray = calcvalue.split(',');
-    calculateArray = calculateArray.filter(n => n);
+    calculateArray = calculateArray.filter(n => !isNaN(n));
     Max();
     Min();
     Sum();
@@ -151,20 +150,20 @@ function capitalizetext() {
 }
 function sortLines() {
     var magicinput = document.getElementById("magic-input").value;
-    var magicArray = magicinput.split("");
+    var magicArray = magicinput.split("\n");
     magicArray.sort();
-    document.getElementById("magic-input").value = magicArray.join("");
+    document.getElementById("magic-input").value = magicArray.join("\n");
 }
 function reverseLines() {
     var magicinput = document.getElementById("magic-input").value;
-    var magicArray = magicinput.split("");
+    var magicArray = magicinput.split("\n");
     magicArray.reverse();
-    document.getElementById("magic-input").value = magicArray.join("");
+    document.getElementById("magic-input").value = magicArray.join("\n");
 }
 function stripBlank() {
     var magicinput = document.getElementById("magic-input").value;
-    var magicArray = magicinput.split("");
-    var newmagicinput = magicArray.filter(line => line.trim() !== "").join("");
+    var magicArray = magicinput.split("\n");
+    var newmagicinput = magicArray.filter(line => line.trim() !== "").join("\n");
     document.getElementById("magic-input").value = newmagicinput;
 }
 function addLineNo() {
@@ -173,15 +172,26 @@ function addLineNo() {
     var newmagicinput = magicArray.map((line, index) => `${index + 1}. ${line}`).join("\n");
     document.getElementById("magic-input").value = newmagicinput;
 }
+
 function shuffleLines() {
     var magicinput = document.getElementById("magic-input").value;
-    var magicArray = magicinput.split("/n");
-    magicArray.shuffle();
-    document.getElementById("magic-input").value = magicArray.join("/n");
+    var magicArray = magicinput.split("\n");
+    var newmagicinput = "";
+    magicArray.sort(function(a, b){return 0.5 - Math.random()});
+    for (var i = 0; i < magicArray.length; i++) {
+        if(i == magicArray.length-1){
+            newmagicinput += magicArray[i];
+        }
+        else{
+            newmagicinput += magicArray[i]+"\n";
+        }
+    }
+    document.getElementById("magic-input").value = newmagicinput;
+    console.log("Shuffled Lines!")
 }
-
 
 window.onload = function() {
     document.getElementById("pagelocation").innerHTML = window.location.href;
     document.getElementById("lastmod").innerHTML = document.lastModified;
 };
+
