@@ -74,7 +74,7 @@ function pink() {
     document.getElementById("quote_text").style.fontWeight = "sans-serif";
 }
 
-
+//converter
 const converterinput = document.getElementById("converter_input");
 converterinput.addEventListener("keyup", function(event) {
     if (event.key === 'Enter') {
@@ -94,6 +94,7 @@ function convert(){
     }
 }
 
+//calculator
 const calculatorinput = document.getElementById("calc-value");
 function calc() {
     var calcvalue = document.getElementById("calc-value").value;
@@ -150,20 +151,20 @@ function capitalizetext() {
 }
 function sortLines() {
     var magicinput = document.getElementById("magic-input").value;
-    var magicArray = magicinput.split("\n");
+    var magicArray = magicinput.split("");
     magicArray.sort();
-    document.getElementById("magic-input").value = magicArray.join("\n");
+    document.getElementById("magic-input").value = magicArray.join("");
 }
 function reverseLines() {
     var magicinput = document.getElementById("magic-input").value;
-    var magicArray = magicinput.split("\n");
+    var magicArray = magicinput.split("");
     magicArray.reverse();
-    document.getElementById("magic-input").value = magicArray.join("\n");
+    document.getElementById("magic-input").value = magicArray.join("");
 }
 function stripBlank() {
     var magicinput = document.getElementById("magic-input").value;
-    var magicArray = magicinput.split("\n");
-    var newmagicinput = magicArray.filter(line => line.trim() !== "").join("\n");
+    var magicArray = magicinput.split("");
+    var newmagicinput = magicArray.filter(line => line.trim() !== "").join("");
     document.getElementById("magic-input").value = newmagicinput;
 }
 function addLineNo() {
@@ -174,139 +175,12 @@ function addLineNo() {
 }
 function shuffleLines() {
     var magicinput = document.getElementById("magic-input").value;
-    var magicArray = magicinput.split("\n");
+    var magicArray = magicinput.split("/n");
     magicArray.shuffle();
-    document.getElementById("magic-input").value = magicArray.join("\n");
-}
-// Quote Box Functionality
-let quotes = [
-    {
-        text: "The only way to do great work is to love what you do.",
-        author: "- Steve Jobs"
-    },
-    {
-        text: "In the middle of every difficulty lies opportunity.",
-        author: "- Albert Einstein"
-    },
-    {
-        text: "It always seems impossible until it's done.",
-        author: "- Nelson Mandela"
-    },
-    {
-        text: "The best way to predict your future is to create it.",
-        author: "- Abraham Lincoln"
-    }
-];
-
-function fetchQuote() {
-    let randomIndex = Math.floor(Math.random() * quotes.length);
-    document.getElementById("quote_text").innerHTML = quotes[randomIndex].text;
-    document.getElementById("quote_author").innerHTML = quotes[randomIndex].author;
+    document.getElementById("magic-input").value = magicArray.join("/n");
 }
 
-function red() {
-    document.body.style.backgroundColor = "#f28d8d";
-}
 
-function blue() {
-    document.body.style.backgroundColor = "#89c4f4";
-}
-
-function yellow() {
-    document.body.style.backgroundColor = "#f7c455";
-}
-
-function pink() {
-    document.body.style.backgroundColor = "#f4a1d9";
-}
-
-// Hero Converter Functionality
-function convert() {
-    let input = document.getElementById("converter_input").value;
-    let unit = document.getElementById("converter_unit").value;
-    let result;
-
-    if (unit === "lbtokg") {
-        result = (input * 0.453592).toFixed(2);
-        document.getElementById("converter_result").innerHTML = `${input} LB = ${result} KG`;
-    } else if (unit === "kgtolb") {
-        result = (input / 0.453592).toFixed(2);
-        document.getElementById("converter_result").innerHTML = `${input} KG = ${result} LB`;
-    }
-}
-
-// Calculator Functionality
-function calc() {
-    document.getElementById("calc-value").value = '';
-    document.getElementById("max").innerHTML = "0";
-    document.getElementById("min").innerHTML = "0";
-    document.getElementById("sum").innerHTML = "0";
-    document.getElementById("average").innerHTML = "0";
-    document.getElementById("reverse").innerHTML = "";
-}
-
-document.getElementById("calc-value").addEventListener("input", function() {
-    let values = document.getElementById("calc-value").value.split(",").map(Number);
-    if (values.length > 0) {
-        let max = Math.max(...values);
-        let min = Math.min(...values);
-        let sum = values.reduce((a, b) => a + b, 0);
-        let average = (sum / values.length).toFixed(2);
-        let reverse = values.reverse().join(", ");
-        
-        document.getElementById("max").innerHTML = max;
-        document.getElementById("min").innerHTML = min;
-        document.getElementById("sum").innerHTML = sum;
-        document.getElementById("average").innerHTML = average;
-        document.getElementById("reverse").innerHTML = reverse;
-    }
-});
-
-// Magic Box Functionality
-function cleartext() {
-    document.getElementById("magic-input").value = '';
-}
-
-function capitalizetext() {
-    let inputText = document.getElementById("magic-input").value;
-    document.getElementById("magic-input").value = inputText.toUpperCase();
-}
-
-function sortLines() {
-    let inputText = document.getElementById("magic-input").value;
-    let lines = inputText.split("\n").sort();
-    document.getElementById("magic-input").value = lines.join("\n");
-}
-
-function reverseLines() {
-    let inputText = document.getElementById("magic-input").value;
-    let lines = inputText.split("\n").reverse();
-    document.getElementById("magic-input").value = lines.join("\n");
-}
-
-function stripBlank() {
-    let inputText = document.getElementById("magic-input").value;
-    let lines = inputText.split("\n").filter(line => line.trim() !== "");
-    document.getElementById("magic-input").value = lines.join("\n");
-}
-
-function addLineNo() {
-    let inputText = document.getElementById("magic-input").value;
-    let lines = inputText.split("\n");
-    for (let i = 0; i < lines.length; i++) {
-        lines[i] = `${i + 1}. ${lines[i]}`;
-    }
-    document.getElementById("magic-input").value = lines.join("\n");
-}
-
-function shuffleLines() {
-    let inputText = document.getElementById("magic-input").value;
-    let lines = inputText.split("\n");
-    lines = lines.sort(() => Math.random() - 0.5);
-    document.getElementById("magic-input").value = lines.join("\n");
-}
-
-// Page Information
 window.onload = function() {
     document.getElementById("pagelocation").innerHTML = window.location.href;
     document.getElementById("lastmod").innerHTML = document.lastModified;
